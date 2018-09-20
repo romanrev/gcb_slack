@@ -37,6 +37,10 @@ const createSlackMessage = (build) => {
           build.source.storageSource.object
   }
   var build_status = build.status
+  var time_taken = -1
+  if (build.status !== 'QUEUED' && build.status !== 'WORKING') {
+      time_taken = ( new Date(build.finishTime) - new Date(build.startTime) )/1000/60
+  }
   if (build.status === 'FAILURE') {
       build_status = `\`${build_status}\``
   }
@@ -54,5 +58,13 @@ const createSlackMessage = (build) => {
       }
     ]
   };
+  if ( time_taken > 0 ) {
+      message.attachments[0].fields.push(
+          {
+            title: 'Time taken',
+            value: time_taken
+          }
+      )
+  }
   return message
 }
