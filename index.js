@@ -28,8 +28,20 @@ const eventToBuild = (data) => {
 
 // createSlackMessage create a message from a build object.
 const createSlackMessage = (build) => {
+  var build_id = build.projectId
+  if (build.source.hasOwnProperty('repoSource')) {
+      build_id = build_id + ': ' + build.source.repoSource.repoName + ' (' +
+          build.source.repoSource.branchName + ')'
+  } else if (build.source.hasOwnProperty('storageSource')) {
+      build_id = build_id + ': ' + build.source.storageSource.bucket + '/' +
+          build.source.storageSource.object
+  }
+  var build_status = build.status
+  if (build.status === 'FAILURE') {
+      build_status = `\`${build_status}\``
+  }
   let message = {
-   text: `Build \`${build.id}\``,
+   text: `Build ${build_id}`,
     mrkdwn: true,
     attachments: [
       {
@@ -37,7 +49,7 @@ const createSlackMessage = (build) => {
         title_link: build.logUrl,
         fields: [{
           title: 'Status',
-          value: build.status
+          value: build_status
         }]
       }
     ]
