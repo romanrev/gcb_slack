@@ -1,0 +1,15 @@
+steps:
+- name: "gcr.io/cloud-builders/gcloud"
+  args: 
+  - functions
+  - deploy
+  - subscribe
+  - '--set-env-vars=SLACK_WEBHOOK=${_SLACK_WEBHOOK}'
+  - '--runtime=nodejs6'
+  - '--region=${_FUNC_REGION}'
+  - '--memory=${_FUNC_MEMORY}'
+  - '--source=./'
+  - '--trigger-topic=cloud-builds'
+substitutions:
+  _FUNC_MEMORY: 128MB
+  _FUNC_REGION: us-central1
