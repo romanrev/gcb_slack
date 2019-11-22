@@ -1,5 +1,5 @@
 const { IncomingWebhook } = require('@slack/webhook');
-const url = process.env.SLACK_WEBHOOK_URL;
+const url = process.env.SLACK_WEBHOOK;
 
 const webhook = new IncomingWebhook(url);
 
