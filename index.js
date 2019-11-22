@@ -39,8 +39,7 @@ const createSlackMessage = (build) => {
   var build_status = build.status
   var time_taken = -1
   if (build.status !== 'QUEUED' && build.status !== 'WORKING') {
-      time_taken = ( new Date(build.finishTime) - new Date(build.startTime) )/1
-000/60
+      time_taken = ( new Date(build.finishTime) - new Date(build.startTime) )/1000/60
   }
   if (build.status === 'FAILURE') {
       build_status = `\`${build_status}\``
