@@ -3,8 +3,8 @@ const url = process.env.SLACK_WEBHOOK;
 
 const webhook = new IncomingWebhook(url);
 
-// subscribeSlack is the main function called by Cloud Functions.
-module.exports.subscribeSlack = (pubSubEvent, context) => {
+// subscribe is the main function called by Cloud Functions.
+module.exports.subscribe = (pubSubEvent, context) => {
   const build = eventToBuild(pubSubEvent.data);
 
   // Skip if the current status is not in the status list.
