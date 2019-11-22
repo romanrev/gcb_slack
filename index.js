@@ -60,5 +60,13 @@ const createSlackMessage = (build) => {
       }
     ]
   };
+  if ( time_taken > 0 ) {
+      message.attachments[0].fields.push(
+          {
+            title: 'Time taken',
+            value: time_taken
+          }
+      )
+  };
   return message;
 }
