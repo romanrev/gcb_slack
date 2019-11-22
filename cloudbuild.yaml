@@ -5,7 +5,7 @@ steps:
   - deploy
   - subscribe
   - '--set-env-vars=SLACK_WEBHOOK=${_SLACK_WEBHOOK}'
-  - '--runtime=nodejs10'
+  - '--runtime=nodejs8'
   - '--region=${_FUNC_REGION}'
   - '--memory=${_FUNC_MEMORY}'
   - '--source=./'
